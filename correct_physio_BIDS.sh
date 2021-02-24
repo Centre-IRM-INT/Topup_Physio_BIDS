@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# script to smooth functional data with Gaussian kernel
+# script to correct the colmun header of the physio json files
 
 study=Mimicry
 
