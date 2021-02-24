@@ -5,5 +5,5 @@ Start by editing the *subjects_to_process.cfg* file
 
 # Requirements
 
-You need to have FSL installed and the FSL commands already callable ($FSLDIR/bin must be in your PATH)
-Same with jq ( https://stedolan.github.io/jq/download/ )
+* FSL installed: the FSL commands must be directly callable ($FSLDIR/bin must be in your PATH)
+* jq ( https://stedolan.github.io/jq/download/ )
