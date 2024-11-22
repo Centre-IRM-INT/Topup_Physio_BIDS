@@ -25,8 +25,9 @@ arrUUIDphys=($arrUUIDphys)
 
 
 
-EXPDIR=/Volumes/groupdata/MRI_BIDS_DATABANK/$study
-
+#EXPDIR=/Volumes/groupdata/MRI_BIDS_DATABANK/$study
+#EXPDIR=/Volumes/data/MRI_BIDS_DATABANK_TEMP/$study
+EXPDIR=/Volumes/data3/MRI_BIDS_DATABANK/$study
 
 for sub in $list_sub
 do

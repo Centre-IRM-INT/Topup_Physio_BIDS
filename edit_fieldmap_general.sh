@@ -6,7 +6,8 @@ source ../Topup_Physio_BIDS/subjects_to_process.cfg
 #EXPDIR=~/Documents/Centre_IRMf/DATA/BIDS/$study
 #EXPDIR=~/disks/meso_scratch/BIDS/$study
 #EXPDIR=/Volumes/data/MRI_BIDS_DATABANK_TEMP/$study
-EXPDIR=/Volumes/groupdata/MRI_BIDS_DATABANK/$study
+EXPDIR=/Volumes/data3/MRI_BIDS_DATABANK/$study
+#EXPDIR=/Volumes/groupdata/MRI_BIDS_DATABANK/$study
 
 ### For all subjects######
 #pushd $EXPDIR
@@ -38,15 +39,17 @@ do
      		##### case with one pair AP-PA ###########
      		echo "case with one pair AP-PA"
 
+     		AP_epi=$(ls ${SUBDIR}/fmap/${sub}_dir-AP_*.json )
+     		PA_epi=$(ls ${SUBDIR}/fmap/${sub}_dir-PA_*.json )
 
 		#	jq '. + { "Units": "Hz"}' "${SUBDIR}/fmap/${sub}_dir-AP_epi.json" > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}/fmap/${sub}_fieldmap.json"
 
 
-			jq 'del(.IntendedFor)' "${SUBDIR}/"fmap/"${sub}_dir-AP_epi.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}/"fmap/"${sub}_dir-AP_epi.json"
-			jq 'del(.IntendedFor)' "${SUBDIR}/"fmap/"${sub}_dir-PA_epi.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}/"fmap/"${sub}_dir-PA_epi.json"
+			jq 'del(.IntendedFor)' "$AP_epi"  > "tmp.$$.json" && mv  "tmp.$$.json" "$AP_epi"
+			jq 'del(.IntendedFor)' "$PA_epi"  > "tmp.$$.json" && mv  "tmp.$$.json" "$PA_epi"
 			#jq 'del(.IntendedFor)' "${SUBDIR}/"fmap/"${sub}_fieldmap.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}/"fmap/"${sub}_fieldmap.json"
 
-			shim1=$(jq .ShimSetting "${SUBDIR}fmap/${sub}_dir-AP_epi.json")	
+			shim1=$(jq .ShimSetting "$AP_epi")	
 
 			list=$(ls "${SUBDIR}func/"*bold.nii.gz)
 
@@ -56,12 +59,13 @@ do
 				funci=${func//$SUBDIR/}
 	 			if [ "$shim2" = "$shim1" ]
 	 			then
-	 				jq --arg funci $funci  '.IntendedFor |= .+  [$funci]' "${SUBDIR}"fmap/"${sub}_dir-AP_epi.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}"fmap/"${sub}_dir-AP_epi.json"
-	 				jq --arg funci $funci  '.IntendedFor |= .+  [$funci]' "${SUBDIR}"fmap/"${sub}_dir-PA_epi.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}"fmap/"${sub}_dir-PA_epi.json"
+	 				jq --arg funci $funci  '.IntendedFor |= .+  [$funci]' "$AP_epi"  > "tmp.$$.json" && mv  "tmp.$$.json" "$AP_epi"
+	 				jq --arg funci $funci  '.IntendedFor |= .+  [$funci]' "$PA_epi"  > "tmp.$$.json" && mv  "tmp.$$.json" "$PA_epi"
 	 				#jq --arg funci $funci  '.IntendedFor |= .+  [$funci]' "${SUBDIR}"fmap/"${sub}_fieldmap.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}"fmap/"${sub}_fieldmap.json"
-	 	#			jq '. + { "B0FieldIdentifier": "B0map"}' "${SUBDIR}"fmap/"${sub}_dir-AP_epi.json" > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}"fmap/"${sub}_dir-AP_epi.json"
-		#			jq '. + { "B0FieldIdentifier": "B0map"}' "${SUBDIR}"fmap/"${sub}_dir-PA_epi.json" > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}"fmap/"${sub}_dir-PA_epi.json"
-		#			jq '. + { "B0FieldSource": "B0map"}' "${func//.nii.gz/.json}" > "tmp.$$.json" && mv  "tmp.$$.json" "${func//.nii.gz/.json}"	
+	 				jq '. + { "B0FieldIdentifier": "B0map"}' "$AP_epi" > "tmp.$$.json" && mv  "tmp.$$.json" "$AP_epi"
+					jq '. + { "B0FieldIdentifier": "B0map"}' "$PA_epi" > "tmp.$$.json" && mv  "tmp.$$.json" "$PA_epi"
+					jq 'del(.B0FieldSource)' "${func//.nii.gz/.json}"  > "tmp.$$.json" && mv  "tmp.$$.json" "${func//.nii.gz/.json}"
+					jq '. + { "B0FieldSource": "B0map"}' "${func//.nii.gz/.json}" > "tmp.$$.json" && mv  "tmp.$$.json" "${func//.nii.gz/.json}"	
 					#jq 'del(.B0FieldIdentifier)' "${SUBDIR}"fmap/"${sub}_fieldmap.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}"fmap/"${sub}_fieldmap.json" 			
 	 			fi
 	 		done
@@ -130,18 +134,21 @@ do
      		##### case with one pair AP-PA ###########
      		echo "case with one pair AP-PA"
 
+     		AP_epi=$(ls ${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-AP_*.json )
+     		PA_epi=$(ls ${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-PA_*.json )
+
 		#	jq '. + { "Units": "Hz"}' "${SUBDIR}$ses/fmap/${sub}_${ses}_dir-AP_epi.json" > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}$ses/fmap/${sub}_${ses}_fieldmap.json"
 
-			jq 'del(.IntendedFor)' "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-AP_epi.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-AP_epi.json"
-			jq 'del(.IntendedFor)' "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-PA_epi.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-PA_epi.json"
-			jq 'del(.B0FieldIdentifier)' "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-AP_epi.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-AP_epi.json"
-			jq 'del(.B0FieldIdentifier)' "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-PA_epi.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-PA_epi.json"
+			jq 'del(.IntendedFor)' "$AP_epi"  > "tmp.$$.json" && mv  "tmp.$$.json" "$AP_epi" 
+			jq 'del(.IntendedFor)' "$PA_epi"   > "tmp.$$.json" && mv  "tmp.$$.json" "$PA_epi" 
+			jq 'del(.B0FieldIdentifier)' "$AP_epi"   > "tmp.$$.json" && mv  "tmp.$$.json" "$AP_epi" 
+			jq 'del(.B0FieldIdentifier)' "$PA_epi"   > "tmp.$$.json" && mv  "tmp.$$.json" "$PA_epi" 
 		#	jq 'del(.IntendedFor)' "${SUBDIR}$ses/"fmap/"${sub}_fieldmap.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}/"fmap/"${sub}_fieldmap.json"
 
-			shim1=$(jq .ShimSetting "${SUBDIR}${ses}/fmap/${sub}_${ses}_dir-AP_epi.json") 
+			shim1=$(jq .ShimSetting "$AP_epi" ) 
 			B0arg="B0map${ses//ses-/}"
-			jq --arg B0arg $B0arg '.B0FieldIdentifier |= .+ $B0arg' "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-AP_epi.json" > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-AP_epi.json"
-			jq --arg B0arg $B0arg '.B0FieldIdentifier |= .+ $B0arg' "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-PA_epi.json" > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-PA_epi.json"
+			jq --arg B0arg $B0arg '.B0FieldIdentifier |= .+ $B0arg' "$AP_epi"  > "tmp.$$.json" && mv  "tmp.$$.json" "$AP_epi" 
+			jq --arg B0arg $B0arg '.B0FieldIdentifier |= .+ $B0arg' "$PA_epi"  > "tmp.$$.json" && mv  "tmp.$$.json" "$PA_epi" 
 			
 
 			list=$(ls "${SUBDIR}${ses}/func/"*bold.nii.gz)
@@ -153,8 +160,8 @@ do
         		if [ "$shim2" = "$shim1" ]
         		then
 				#	jq --arg funci $funci  '.IntendedFor |= .+  [$funci]' "${SUBDIR}$ses/"fmap/"${sub}_${ses}_fieldmap.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}$ses/"fmap/"${sub}_${ses}_fieldmap.json"
-					jq --arg funci $funci  '.IntendedFor |= .+  [$funci]' "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-AP_epi.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-AP_epi.json"
-					jq --arg funci $funci  '.IntendedFor |= .+  [$funci]' "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-PA_epi.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}$ses/"fmap/"${sub}_${ses}_dir-PA_epi.json"
+					jq --arg funci $funci  '.IntendedFor |= .+  [$funci]' "$AP_epi"   > "tmp.$$.json" && mv  "tmp.$$.json" "$AP_epi" 
+					jq --arg funci $funci  '.IntendedFor |= .+  [$funci]' "$PA_epi"   > "tmp.$$.json" && mv  "tmp.$$.json" "$PA_epi" 
 					jq 'del(.B0FieldSource)' "${func//.nii.gz/.json}"  > "tmp.$$.json" && mv  "tmp.$$.json" "${func//.nii.gz/.json}"
 					jq --arg B0arg $B0arg '.B0FieldSource |= .+ $B0arg' "${func//.nii.gz/.json}" > "tmp.$$.json" && mv  "tmp.$$.json" "${func//.nii.gz/.json}"
 				#	jq 'del(.B0FieldIdentifier)' "${SUBDIR}$ses/"fmap/"${sub}_${ses}_fieldmap.json"  > "tmp.$$.json" && mv  "tmp.$$.json" "${SUBDIR}$ses/"fmap/"${sub}_${ses}_fieldmap.json"

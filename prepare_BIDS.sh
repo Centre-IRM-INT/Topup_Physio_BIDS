@@ -44,6 +44,17 @@ case $study in
 		bash physio_WIP.sh   
 
 	;;
+
+	CervicalSpine)
+		echo "--- project PhantomPainSpine ---"
+		echo "--- bash create_session_new.sh ---"
+		bash create_session_new.sh
+		echo "--- move_loca_events_general.sh ---"
+		bash move_loca_events_general.sh 
+		echo "--- physio_WIP.sh ---"
+		bash physio_WIP.sh   
+
+	;;
 	
 	TimOn)
 		echo "--- project TimOn ---"
@@ -69,12 +80,17 @@ case $study in
 
 	NEMO)
 		echo "--- project NEMO ---"
-		echo "--- running edit_fieldmap_general.sh ... ---"
-		bash edit_fieldmap_general.sh
+		echo "--- running add_session.sh ... ---"
+		bash add_session.sh
 		echo "--- running move_loca_events_general.sh ... ---"
 		bash move_loca_events_general.sh 
 		echo "--- running physio_general.sh ... ---"
 		bash physio_general.sh 
+		echo "--- running edit_fieldmap_general.sh ... ---"
+		bash edit_fieldmap_general.sh
+		echo "--- running move_spectro_general.sh ... ---"
+		bash move_spectro_general.sh
+
 	;;
 
 	OculoTMS)
@@ -105,12 +121,133 @@ case $study in
 		bash create_session_new.sh
 		echo "--- running edit_fieldmap_general.sh ... ---"
 		bash edit_fieldmap_general.sh
-		echo "--- running move_loca_events_general.sh ... ---"
+		echo "--- running move_loca_events_general.sh ... ---" 
 		bash move_loca_events_general.sh 
 		echo "--- running physio_general.sh ... ---"
 		bash physio_general.sh 
 		echo "--- running prepare_b0.sh ... ---"
 		bash prepare_b0.sh 
+	;;
+
+
+	TP_MASCO)
+		echo "--- project TP_MASCO ---"
+		#echo "--- bash create_session_new.sh ---"
+		#bash create_session_new.sh
+		echo "--- running edit_fieldmap_general.sh ... ---"
+		bash edit_fieldmap_general.sh
+		echo "--- running move_loca_events_general.sh ... ---"
+		bash move_loca_events_general.sh 
+		echo "--- running physio_general.sh ... ---"
+		bash physio_general.sh 
+	;;
+
+	GesteSigne)
+		echo "--- project GesteSigne ---"
+		echo "--- bash create_session_new.sh ---"
+		bash create_session_new.sh
+		echo "--- running edit_fieldmap_general.sh ... ---"
+		bash edit_fieldmap_general.sh
+		echo "--- running move_loca_events_general.sh ... ---"
+		bash move_loca_events_general.sh 
+		echo "--- running physio_general.sh ... ---"
+		bash physio_general.sh 
+	;;
+
+	RevCorf0)
+		echo "--- project RevCorf0 ---"
+		echo "--- bash create_session_new.sh ---"
+		bash create_session_new.sh
+		echo "--- running edit_fieldmap_RevCorf0_new.sh ... ---"
+		bash edit_fieldmap_RevCorf0_new.sh
+		echo "--- running physio_general.sh ... ---"
+		bash physio_general.sh 
+
+	;;
+
+	DrugAddict)
+		echo "--- project DrugAddict ---"
+		echo "--- running edit_fieldmap_general.sh ... ---"
+		bash edit_fieldmap_general.sh
+		echo "--- running move_loca_events_general.sh ... ---"
+		bash move_loca_events_general.sh 
+		echo "--- running physio_general.sh ... ---"
+		bash physio_general.sh 
+
+	;;
+	AlcAddict)
+		echo "--- project AlcAddict ---"
+		echo "--- bash add_session_.sh ---"
+		bash add_session.sh
+		echo "--- running edit_fieldmap_general.sh ... ---"
+		bash edit_fieldmap_general.sh
+		echo "--- running move_loca_events_general.sh ... ---"
+		bash move_loca_events_general.sh 
+		echo "--- running physio_general.sh ... ---"
+		bash physio_general.sh 
+
+	;;
+	DeepMReye)
+		echo "--- project DeepMReye ---"
+		echo "--- bash create_session_new.sh ---"
+		bash create_session_new.sh
+		echo "--- running edit_fieldmap_general.sh ... ---"
+		bash edit_fieldmap_general.sh
+		echo "--- running physio_general.sh ... ---"
+		bash physio_general.sh 
+
+	;;
+
+	MotConf)
+		echo "--- project DeepMReye ---"
+		echo "--- bash add_session.sh ---"
+		bash add_session.sh
+		echo "--- running edit_fieldmap_general.sh ... ---"
+		bash edit_fieldmap_general.sh
+		echo "--- running physio_general.sh ... ---"
+		bash physio_general.sh 
+
+	;;
+
+	MotorLang)
+		echo "--- project MotorLang ---"
+		echo "--- bash add_session.sh ---"
+		bash add_session.sh
+		echo "--- running edit_fieldmap_general.sh ... ---"
+		bash edit_fieldmap_general.sh
+		echo "--- running move_loca_events_general.sh ... ---"
+		bash move_loca_events_general.sh 
+		echo "--- running physio_general.sh ... ---"
+		bash physio_general.sh 
+
+	;;
+
+	ArtificialVoice)
+		echo "--- project ArtificialVoice ---"
+		echo "--- bash add_session.sh ---"
+		bash add_session.sh
+		echo "--- running batch_fieldmap_general.sh ... ---"
+		bash batch_fieldmap_general.sh
+		echo "--- running move_loca_events_general.sh ... ---"
+		bash move_loca_events_general.sh 
+		echo "--- running physio_general.sh ... ---"
+		bash physio_general.sh 
+
+	;;
+
+	Inhibition)
+		echo "--- project ArtificialVoice ---"
+		echo "--- bash add_session.sh ---"
+		bash add_session.sh
+		echo "--- running edit_fieldmap_general.sh ... ---"
+		bash edit_fieldmap_general.sh
+		echo "--- running move_loca_events_general.sh ... ---"
+		bash move_loca_events_general.sh 
+		echo "--- running physio_general.sh ... ---"
+		bash physio_general.sh 
+		echo "--- running move_spectroRAW_general.sh ... ---"
+		bash move_spectroRAW_general.sh
+
 	;;
 
 

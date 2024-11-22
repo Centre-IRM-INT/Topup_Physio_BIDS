@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# script to correct the colmun header of the physio json files
+# script to smooth functional data with Gaussian kernel
 
-study=Mimicry
+study=TP_APP
 
 EXPDIR=/Volumes/groupdata/MRI_BIDS_DATABANK/$study
 

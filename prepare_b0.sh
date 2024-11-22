@@ -8,8 +8,8 @@ source ~/JUL/Topup_Physio_BIDS/subjects_to_process.cfg
 #EXPDIR=/home/seinj/mygpdata/MRI_BIDS_DATABANK/$study
 #EXPDIR=~/Documents/Centre_IRMf/DATA/BIDS/$study
 #EXPDIR=~/disks/meso_scratch/BIDS/$study
-#EXPDIR=/Volumes/data/MRI_BIDS_DATABANK_TEMP/$study
-EXPDIR=/Volumes/groupdata/MRI_BIDS_DATABANK/$study
+EXPDIR=/Volumes/data/MRI_BIDS_DATABANK_TEMP/$study
+#EXPDIR=/Volumes/groupdata/MRI_BIDS_DATABANK/$study
 
 ### For all subjects######
 #pushd $EXPDIR
